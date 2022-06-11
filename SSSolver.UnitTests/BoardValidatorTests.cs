@@ -28,13 +28,14 @@ public class BoardConstructionTests
     public void CanConstruct()
     {
         var board = new Board(Nums);
-        Assert.NotNull(board);
+        var boardValidator = new BoardValidator(board);
+        Assert.NotNull(boardValidator);
     }
     
     [Fact]
     public void GivenWidthIsWrong_ThrowsException()
     {
-        Assert.Throws<ArgumentException>(() => new Board(new int[8]));
+        Assert.Throws<ArgumentException>(() => new BoardValidator(new Board(new int[8])));
     }
 
     [Fact]
@@ -53,7 +54,8 @@ public class BoardConstructionTests
             0, 0, 0, 0, 0, 0, 0, 0, 0,
         };
         var board = new Board(nums);
-        Assert.False(board.IsLegal());
+        var boardValidator = new BoardValidator(board);
+        Assert.False(boardValidator.IsBoardLegal());
     }
     
     [Fact]
@@ -72,7 +74,8 @@ public class BoardConstructionTests
             0, 0, 0, 0, 0, 0, 0, 0, 1,
         };
         var board = new Board(nums);
-        Assert.False(board.IsLegal());
+        var boardValidator = new BoardValidator(board);
+        Assert.False(boardValidator.IsBoardLegal());
     }
 
     [Fact]
@@ -91,6 +94,27 @@ public class BoardConstructionTests
             0, 0, 0, 0, 0, 0, 0, 0, 0,
         };
         var board = new Board(nums);
-        Assert.False(board.IsLegal());
+        var boardValidator = new BoardValidator(board);
+        Assert.False(boardValidator.IsBoardLegal());
+    }
+
+    [Fact]
+    public void DetectsLegalBoard()
+    {
+        var nums = new[]
+        {
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 1, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0,
+        };
+        var board = new Board(nums);
+        var boardValidator = new BoardValidator(board);
+        Assert.True(boardValidator.IsBoardLegal());
     }
 }
