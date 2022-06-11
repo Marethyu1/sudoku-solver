@@ -20,6 +20,24 @@ public class Board
         _numbers = numbers;
     }
 
+    public IEnumerable<IEnumerable<int>> GetAllPossibleSequences()
+    {
+        foreach (var row in GetRows())
+        {
+            yield return row;
+        }
+
+        foreach (var column in GetColumns())
+        {
+            yield return column;
+        }
+
+        foreach (var box in GetBoxes())
+        {
+            yield return box;
+        }
+    }
+
     public IEnumerable<IEnumerable<int>> GetRows()
     {
         return GetSequences(RowIterator);

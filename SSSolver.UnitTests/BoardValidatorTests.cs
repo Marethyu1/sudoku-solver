@@ -117,4 +117,11 @@ public class BoardConstructionTests
         var boardValidator = new BoardValidator(board);
         Assert.True(boardValidator.IsBoardLegal());
     }
+    
+    [Fact]
+    public void DetectsCorrect()
+    {
+        var boardValidator = new BoardValidator(ExampleBoards.CorrectBoard());
+        Assert.True(boardValidator.IsBoardCorrect());
+    }
 }

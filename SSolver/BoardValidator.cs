@@ -11,9 +11,17 @@ public class BoardValidator
     
     public bool IsBoardLegal()
     {
-        return AreRowsLegal() && AreColumnsLegal() && AreBoxesLegal();
+        return _board.GetAllPossibleSequences()
+            .All(AreNumbersLegal);
     }
 
+    public bool IsBoardCorrect()
+    {
+        return _board
+            .GetAllPossibleSequences()
+            .All(IsCorrect);
+    }
+    
     private static bool AreSequencesLegal(IEnumerable<IEnumerable<int>> sequences)
     {
         return sequences.All(AreNumbersLegal);
@@ -32,6 +40,24 @@ public class BoardValidator
     private bool AreRowsLegal()
     {
         return AreSequencesLegal(_board.GetRows());
+    }
+
+    private static bool IsCorrect(IEnumerable<int> numbers)
+    {
+        var set = new HashSet<int>();
+        foreach (var number in numbers)
+        {
+            if (number is < 1 or > 9)
+            {
+                return false;
+            }
+            if (set.Contains(number))
+            {
+                return false;
+            }
+            set.Add(number);
+        }
+        return true;
     }
     
     private static bool AreNumbersLegal(IEnumerable<int> numbers)
