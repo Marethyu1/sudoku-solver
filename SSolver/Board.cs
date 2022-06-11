@@ -86,7 +86,6 @@ public class Board
     {
         foreach (var box in Boxes())
         {
-            Console.WriteLine(string.Join(' ', box));
             if (!AreNumbersLegal(box))
             {
                 return false;
