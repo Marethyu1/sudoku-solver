@@ -1,5 +1,4 @@
 namespace SSolver;
-using b = Box;
 public class Board
 {
     private readonly int[] _numbers;
@@ -16,12 +15,7 @@ public class Board
         _numbers = numbers;
     }
 
-    public bool IsLegal()
-    {
-        return IsRowsLegal() && IsColumnsLegal() && IsBoxesLegal();
-    }
-
-    private IEnumerable<IEnumerable<int>> Rows()
+    public IEnumerable<IEnumerable<int>> GetRows()
     {
         for (var i = 0; i < Length; i += RowLength)
         {
@@ -30,15 +24,15 @@ public class Board
         }
     }
     
-    private IEnumerable<IEnumerable<int>> Columns()
+    public IEnumerable<IEnumerable<int>> GetColumns()
     {
         for (var i = 0; i < RowLength; i += 1)
         {
-            yield return Column(i);
+            yield return GetColumn(i);
         }
     }
 
-    private IEnumerable<int> Column(int startIndex)
+    private IEnumerable<int> GetColumn(int startIndex)
     {
         for (var i = startIndex; i < Length; i += RowLength)
         {
@@ -46,72 +40,13 @@ public class Board
         }
     }
     
-    private IEnumerable<IEnumerable<int>> Boxes()
+    public IEnumerable<IEnumerable<int>> GetBoxes()
     {
-        return b.Boxes().Select(Box);
+        return Box.Boxes().Select(GetBox);
     }
     
-    private IEnumerable<int> Box(IEnumerable<int> boxIndexes)
+    private IEnumerable<int> GetBox(IEnumerable<int> boxIndexes)
     {
         return boxIndexes.Select(boxIndex => _numbers[boxIndex]);
-    }
-
-    private bool IsRowsLegal()
-    {
-        foreach (var row in Rows())
-        {
-            if (!AreNumbersLegal(row))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private bool IsColumnsLegal()
-    {
-        foreach (var column in Columns())
-        {
-            if (!AreNumbersLegal(column))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private bool IsBoxesLegal()
-    {
-        foreach (var box in Boxes())
-        {
-            if (!AreNumbersLegal(box))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private static bool AreNumbersLegal(IEnumerable<int> numbers)
-    {
-        var set = new HashSet<int>();
-        foreach (var number in numbers)
-        {
-            switch (number)
-            {
-                case < 0 or > 9:
-                    return false;
-                case 0:
-                    continue;
-            }
-
-            if (set.Contains(number))
-            {
-                return false;
-            }
-
-            set.Add(number);
-        }
-        return true;
     }
 }

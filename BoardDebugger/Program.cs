@@ -16,4 +16,5 @@ var nums = new[]
     0, 0, 0, 0, 0, 0, 0, 0, 1,
 };
 var board = new Board(nums);
-board.IsLegal();
+var v = new BoardValidator(board);
+v.IsBoardLegal();
