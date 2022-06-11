@@ -1,9 +1,14 @@
+using SSolver.Iterators;
+
 namespace SSolver;
 public class Board
 {
     private readonly int[] _numbers;
-    private const int Length = 81;
-    private const int RowLength = 9;
+    public const int Length = 81;
+    public const int SequenceLength = 9;
+    private static readonly ISequenceIterator RowIterator = new RowIterator();
+    private static readonly ISequenceIterator ColumnIterator = new ColumnIterator();
+    private static readonly ISequenceIterator BoxIterator = new BoxIterator();
 
     
     public Board(int[] numbers)
@@ -17,36 +22,28 @@ public class Board
 
     public IEnumerable<IEnumerable<int>> GetRows()
     {
-        for (var i = 0; i < Length; i += RowLength)
-        {
-            var upperIndex = i + RowLength;
-            yield return _numbers[i..upperIndex];
-        }
+        return GetSequences(RowIterator);
     }
     
     public IEnumerable<IEnumerable<int>> GetColumns()
     {
-        for (var i = 0; i < RowLength; i += 1)
-        {
-            yield return GetColumn(i);
-        }
-    }
-
-    private IEnumerable<int> GetColumn(int startIndex)
-    {
-        for (var i = startIndex; i < Length; i += RowLength)
-        {
-            yield return _numbers[i];
-        }
+        return GetSequences(ColumnIterator);
     }
     
     public IEnumerable<IEnumerable<int>> GetBoxes()
     {
-        return Box.Boxes().Select(GetBox);
+        return GetSequences(BoxIterator);
     }
-    
-    private IEnumerable<int> GetBox(IEnumerable<int> boxIndexes)
+
+    private IEnumerable<IEnumerable<int>> GetSequences(ISequenceIterator iterator)
     {
-        return boxIndexes.Select(boxIndex => _numbers[boxIndex]);
+        return iterator
+            .GetSequences()
+            .Select(GetNumbersAtIndexes);
     }
-}
+
+    private IEnumerable<int> GetNumbersAtIndexes(IEnumerable<int> indexes)
+    {
+        return indexes.Select(i => _numbers[i]);
+    }                                          
+}                                                                                
