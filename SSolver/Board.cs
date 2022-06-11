@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic;
-
 namespace SSolver;
 using b = Box;
 public class Board
