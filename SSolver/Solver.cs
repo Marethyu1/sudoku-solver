@@ -29,6 +29,11 @@ public class Solver
                 {
                     return _board;
                 }
+
+                if (_boardValidator.IsBoardLegal())
+                {
+                    break;
+                }
             }
         }
         
