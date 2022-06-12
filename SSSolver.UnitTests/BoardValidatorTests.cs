@@ -1,3 +1,4 @@
+using SodukoBoard;
 using SSolver;
 using Xunit.Abstractions;
 

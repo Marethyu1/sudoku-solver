@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using SodukoBoard;
 using SSolver;
 using Xunit.Abstractions;
 

@@ -1,3 +1,4 @@
+using SodukoBoard;
 using SSolver;
 
 namespace SSSolver.UnitTests;

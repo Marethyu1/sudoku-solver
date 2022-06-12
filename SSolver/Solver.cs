@@ -1,3 +1,5 @@
+using SodukoBoard;
+
 namespace SSolver;
 
 public class Solver

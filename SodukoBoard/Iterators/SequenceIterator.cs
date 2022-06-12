@@ -1,4 +1,4 @@
-namespace SSolver.Iterators;
+namespace SodukoBoard.Iterators;
 
 public interface ISequenceIterator
 {

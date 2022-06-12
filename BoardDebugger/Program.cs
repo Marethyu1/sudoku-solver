@@ -1,4 +1,5 @@
-﻿using SSolver;
+﻿using SodukoBoard;
+using SSolver;
 
 var numbers = new[]
 {

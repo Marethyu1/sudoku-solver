@@ -1,7 +1,7 @@
 using System.Collections;
-using SSolver.Iterators;
+using SodukoBoard.Iterators;
 
-namespace SSolver;
+namespace SodukoBoard;
 public class Board: IEnumerable<int>
 {
     private readonly int[] _numbers;
