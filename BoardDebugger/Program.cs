@@ -1,14 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using SSolver;
 
+var numbers = new[]
+{
+    0, 0, 0,  0, 3, 1,  0, 0, 0,
+    0, 0, 0,  0, 0, 0,  0, 0, 3,
+    0, 0, 1,  0, 7, 0,  0, 8, 2,
+            
+    0, 0, 0,  0, 4, 0,  0, 0, 0,
+    1, 0, 5,  7, 0, 0,  8, 2, 4,
+    7, 0, 0,  0, 0, 0,  9, 0, 0,
+            
+    0, 0, 0,  0, 1, 3,  0, 5, 0,
+    0, 0, 3,  0, 6, 0,  4, 0, 8,
+    0, 9, 8,  0, 2, 0,  0, 3, 0,
+};
 
-using SSolver;
-using SSSolver.UnitTests;
+var board = new Board(numbers);
 
-
-var board = ExampleBoards.CorrectBoard();
-board[80] = 0;
-var s = new Solver(board);
-var b = s.Solve();
-var boardValidator = new BoardValidator(b);
-var isLegal = boardValidator.IsBoardLegal();
-Console.WriteLine(isLegal);
+var solver = new Solver(board);
+var solvedBoard = solver.Solve();
+Console.WriteLine(new BoardValidator(solvedBoard).IsBoardCorrect());

@@ -11,7 +11,6 @@ public class Board: IEnumerable<int>
     private static readonly ISequenceIterator ColumnIterator = new ColumnIterator();
     private static readonly ISequenceIterator BoxIterator = new BoxIterator();
 
-    
     public Board(int[] numbers)
     {
         if (numbers.Length != Length)
@@ -80,5 +79,22 @@ public class Board: IEnumerable<int>
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    public void Display()
+    {
+        Console.WriteLine("------------------------------");
+        foreach (var row in GetRows())
+        {
+            Console.WriteLine(string.Join(' ', row));
+        }
+        Console.WriteLine("------------------------------");
+    }
+
+    public Board GetCopy()
+    {
+        var copy = new int[81];
+        _numbers.CopyTo(copy, 0);
+        return new Board(copy);
     }
 }                                                                                

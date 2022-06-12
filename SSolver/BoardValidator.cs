@@ -14,10 +14,23 @@ public class BoardValidator
         return _board.GetAllPossibleSequences()
             .All(AreNumbersLegal);
     }
+    
+    public static bool IsBoardLegal(Board board)
+    {
+        return board.GetAllPossibleSequences()
+            .All(AreNumbersLegal);
+    }
 
     public bool IsBoardCorrect()
     {
         return _board
+            .GetAllPossibleSequences()
+            .All(IsCorrect);
+    }
+    
+    public static bool IsBoardCorrect(Board board)
+    {
+        return board
             .GetAllPossibleSequences()
             .All(IsCorrect);
     }

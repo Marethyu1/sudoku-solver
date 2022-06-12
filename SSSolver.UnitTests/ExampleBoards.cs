@@ -18,6 +18,8 @@ public static class ExampleBoards
 
     public static Board CorrectBoard()
     {
-        return new Board(CorrectBoardNums);
+        var array = new int[81];
+        CorrectBoardNums.CopyTo(array, 0);
+        return new Board(array);
     }
 }
