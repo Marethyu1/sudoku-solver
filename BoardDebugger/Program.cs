@@ -2,19 +2,13 @@
 
 
 using SSolver;
+using SSSolver.UnitTests;
 
-var nums = new[]
-{
-    1, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 1, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-};
-var board = new Board(nums);
-var v = new BoardValidator(board);
-v.IsBoardLegal();
+
+var board = ExampleBoards.CorrectBoard();
+board[80] = 0;
+var s = new Solver(board);
+var b = s.Solve();
+var boardValidator = new BoardValidator(b);
+var isLegal = boardValidator.IsBoardLegal();
+Console.WriteLine(isLegal);

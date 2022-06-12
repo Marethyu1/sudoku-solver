@@ -1,7 +1,8 @@
+using System.Collections;
 using SSolver.Iterators;
 
 namespace SSolver;
-public class Board
+public class Board: IEnumerable<int>
 {
     private readonly int[] _numbers;
     public const int Length = 81;
@@ -63,5 +64,21 @@ public class Board
     private IEnumerable<int> GetNumbersAtIndexes(IEnumerable<int> indexes)
     {
         return indexes.Select(i => _numbers[i]);
-    }                                          
+    }
+
+    public int this[int i]
+    {
+        get => _numbers[i];
+        set => _numbers[i] = value;
+    }
+
+    public IEnumerator<int> GetEnumerator()
+    {
+        return ((IEnumerable<int>)_numbers).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }                                                                                
