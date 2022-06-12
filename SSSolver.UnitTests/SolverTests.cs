@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using SSolver;
 
 namespace SSSolver.UnitTests;
@@ -94,7 +95,11 @@ public class SolverTests
         Assert.False(boardValidator.IsBoardCorrect());
 
         var solver = new Solver(board);
+        var s = new Stopwatch();
+        s.Start();
         var solvedBoard = solver.Solve();
+        s.Stop();
         Assert.True(new BoardValidator(solvedBoard).IsBoardCorrect());
+        Assert.True(s.ElapsedMilliseconds < 1000 * 90);
     }
 }
