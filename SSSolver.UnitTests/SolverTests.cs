@@ -1,10 +1,18 @@
 using System.Diagnostics;
 using SSolver;
+using Xunit.Abstractions;
 
 namespace SSSolver.UnitTests;
 
 public class SolverTests
 {
+    private readonly ITestOutputHelper _testOutputHelper;
+
+    public SolverTests(ITestOutputHelper testOutputHelper)
+    {
+        _testOutputHelper = testOutputHelper;
+    }
+
     [Fact]
     public void CanSolveOneMissing()
     {
@@ -100,6 +108,7 @@ public class SolverTests
         var solvedBoard = solver.Solve();
         s.Stop();
         Assert.True(new BoardValidator(solvedBoard).IsBoardCorrect());
+        _testOutputHelper.WriteLine($"Took {s.ElapsedMilliseconds/1000}s to solve");
         Assert.True(s.ElapsedMilliseconds < 1000 * 90);
     }
 }

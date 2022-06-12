@@ -1,7 +1,7 @@
 namespace SSolver;
 
 public class Solver
-{
+{   
     private readonly Board _board;
     private readonly BoardValidator _boardValidator;
     private int _count = 0;
@@ -17,32 +17,31 @@ public class Solver
         _count += 1;
         if (_count % 1000 == 0)
         {
-            _board.Display();
+            // _board.Display();
         }
         for (var i = 0; i < Board.Length; i++)
         {
-            if (_board[i] == 0)
+            if (_board[i] != 0) continue;
+            
+            for (var j = 1; j < 10; j++)
             {
-                for (var j = 1; j < 10; j++)
+                _board[i] = j;
+                // _board.Display();
+                if (BoardValidator.IsBoardLegal(_board))
                 {
-                    _board[i] = j;
-                    // _board.Display();
-                    if (BoardValidator.IsBoardLegal(_board))
+                    if (RecursiveSolve())
                     {
-                        if (RecursiveSolve())
-                        {
-                            return true;
-                        }
-                        _board[i] = 0;
+                        return true;
                     }
-                    else
-                    {
-                        _board[i] = 0;
-                    }
+                    _board[i] = 0;
                 }
-
-                return false;
+                else
+                {
+                    _board[i] = 0;
+                }
             }
+
+            return false;
         }
 
         return true;

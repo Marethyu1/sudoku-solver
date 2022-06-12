@@ -86,12 +86,9 @@ public class BoardValidator
                     continue;
             }
 
-            if (set.Contains(number))
-            {
+            var exists = set.Add(number);
+            if (!exists) 
                 return false;
-            }
-
-            set.Add(number);
         }
         return true;
     }
