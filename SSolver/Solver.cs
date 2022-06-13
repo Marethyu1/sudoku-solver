@@ -17,7 +17,7 @@ public class Solver
     public bool RecursiveSolve()
     {
         _count += 1;
-        if (_count % 1000 == 0)
+        if (_count % 10000 == 0)
         {
             // _board.Display();
         }
@@ -29,7 +29,7 @@ public class Solver
             {
                 _board[i] = j;
                 // _board.Display();
-                if (BoardValidator.IsBoardLegal(_board))
+                if (BoardValidator.IsIndexLegal(_board, i))
                 {
                     if (RecursiveSolve())
                     {
@@ -53,6 +53,10 @@ public class Solver
     {
         RecursiveSolve();
         _board.Display();
+        if (!BoardValidator.IsBoardCorrect(_board))
+        {
+            throw new Exception("Board wasn't legal");
+        }
         return _board;
     }
 }

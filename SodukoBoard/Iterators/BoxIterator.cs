@@ -13,9 +13,14 @@ public class BoxIterator: ISequenceIterator
         new[] { 57, 58, 59, 66, 67, 68, 75, 76, 77 },
         new[] { 60, 61, 62, 69, 70, 71, 78, 79, 80 }
     };
-    
+
     public IEnumerable<IEnumerable<int>> GetSequences()
     {
         return SequenceIndexes;
+    }
+
+    public IEnumerable<IEnumerable<int>> GetSequenceAtIndex(int index)
+    {
+        return SequenceIndexes.Where(t => t.Contains(index));
     }
 }

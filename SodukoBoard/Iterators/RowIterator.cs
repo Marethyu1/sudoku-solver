@@ -14,4 +14,13 @@ public class RowIterator : ISequenceIterator
         }                                           
         
     }
+
+    public IEnumerable<IEnumerable<int>> GetSequenceAtIndex(int index)
+    {
+        var columnIndex = index % 9;
+        var rowIndex = (index - columnIndex) / 9;
+        return GetSequences()
+            .Skip(rowIndex)
+            .Take(1);
+    }
 }

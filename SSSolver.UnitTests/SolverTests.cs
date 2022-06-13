@@ -110,6 +110,6 @@ public class SolverTests
         s.Stop();
         Assert.True(new BoardValidator(solvedBoard).IsBoardCorrect());
         _testOutputHelper.WriteLine($"Took {s.ElapsedMilliseconds/1000}s to solve");
-        Assert.True(s.ElapsedMilliseconds < 1000 * 90);
+        Assert.True(s.ElapsedMilliseconds < 1000 * 25);
     }
 }

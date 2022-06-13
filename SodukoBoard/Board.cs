@@ -64,6 +64,26 @@ public class Board: IEnumerable<int>
     {
         return indexes.Select(i => _numbers[i]);
     }
+    
+    
+    public IEnumerable<IEnumerable<int>> GetAllPossibleSequencesAtIndex(int i)
+    {
+        foreach (var row in RowIterator.GetSequenceAtIndex(i))
+        {
+            yield return GetNumbersAtIndexes(row);
+        }
+        
+        foreach (var column in ColumnIterator.GetSequenceAtIndex(i))
+        {
+            yield return GetNumbersAtIndexes(column);;
+        }
+        
+        foreach (var box in BoxIterator.GetSequenceAtIndex(i))
+        {
+            yield return GetNumbersAtIndexes(box);
+        }
+
+    }
 
     public int this[int i]
     {

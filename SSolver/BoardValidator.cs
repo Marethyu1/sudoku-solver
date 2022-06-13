@@ -36,26 +36,6 @@ public class BoardValidator
             .GetAllPossibleSequences()
             .All(IsCorrect);
     }
-    
-    private static bool AreSequencesLegal(IEnumerable<IEnumerable<int>> sequences)
-    {
-        return sequences.All(AreNumbersLegal);
-    }
-
-    private bool AreBoxesLegal()
-    {
-        return AreSequencesLegal(_board.GetBoxes());
-    }
-
-    private bool AreColumnsLegal()
-    {
-        return AreSequencesLegal(_board.GetColumns());
-    }
-
-    private bool AreRowsLegal()
-    {
-        return AreSequencesLegal(_board.GetRows());
-    }
 
     private static bool IsCorrect(IEnumerable<int> numbers)
     {
@@ -94,6 +74,11 @@ public class BoardValidator
         }
         return true;
     }
-
-
+    
+    public static bool IsIndexLegal(Board board, int i)
+    {
+        return board
+            .GetAllPossibleSequencesAtIndex(i)
+            .All(AreNumbersLegal);
+    }
 }

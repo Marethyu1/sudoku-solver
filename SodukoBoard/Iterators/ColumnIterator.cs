@@ -13,7 +13,15 @@ public class ColumnIterator: ISequenceIterator
             yield return GetColumnIndexes(i);
         }                                           
     }
-    
+
+    public IEnumerable<IEnumerable<int>> GetSequenceAtIndex(int index)
+    {
+        var columnIndex = index % 9;
+        return GetSequences()
+            .Skip(columnIndex)
+            .Take(1);
+    }
+
     private static IEnumerable<int> GetColumnIndexes(int startIndex)            
     {                                                             
         for (var i = startIndex; i < Length; i += SequenceLength) 
